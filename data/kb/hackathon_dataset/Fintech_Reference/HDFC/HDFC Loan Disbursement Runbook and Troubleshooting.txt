@@ -1,0 +1,72 @@
+HDFC Education Loan Disbursement Runbook – Process and Troubleshooting
+
+1. Disbursement Process Overview
+• SLA: Domestic disbursements within 48-72 hours of document completion
+• International (LRS): 72-96 hours
+• Trigger: Digital Loan Folder must be complete and locked
+
+2. Pre-Disbursement Requirements (All must be fulfilled)
+• Signed loan agreement (e-signed via Aadhaar/DigiLocker)
+• Active e-NACH or e-Mandate for repayment setup
+• Valid university fee schedule or Demand Letter
+• CIBIL refresh (student + co-applicant) within 24 hours
+• Post-dated cheques received (if applicable for unsecured loans)
+
+3. Common Reasons for Disbursement Delay (15+ days)
+
+REASON 1: e-NACH / e-Mandate Rejection or Pending
+• Disbursement cannot proceed without valid repayment channel
+• Action: Re-initiate mandate link; verify bank account is active
+• Resolution time: 2-3 business days after mandate success
+
+REASON 2: Document Incomplete or Pending Verification
+• Missing fee invoice, demand letter, or institute confirmation
+• Name mismatch between PAN/Aadhaar and admission letter
+• Action: Submit Affidavit of Identity if name mismatch; get institute demand letter
+• Resolution: 3-5 days after document receipt
+
+REASON 3: CIBIL or Credit Check Issue
+• New default detected in co-applicant or student credit report
+• CIBIL refresh required but not done
+• Action: Resolve any outstanding dues; wait for CIBIL update (7-14 days)
+• Escalation: Tier 2 if delay exceeds 12 hours
+
+REASON 4: PAN-Aadhaar Not Linked
+• RBI mandate: PAN must be linked to Aadhaar for financial transactions
+• Transaction will fail at bank processing
+• Action: Student/co-applicant must link PAN on incometax.gov.in
+• Resolution: Same day after linking
+
+REASON 5: Institute Bank Details or Fee Confirmation Pending
+• University has not provided fee breakdown or bank account
+• Fee structure changed after sanction
+• Action: Obtain revised demand letter from institute
+• Resolution: 2-5 days depending on institute response
+
+REASON 6: Margin Money or Top-Up Not Paid
+• For loans above unsecured limit, margin (5-15%) must be paid first
+• Action: Pay margin to institute or as per sanction letter
+• Resolution: 1-2 days after margin receipt
+
+REASON 7: LRS Limit Exceeded (International Loans)
+• Student has already remitted > $250,000 USD in current financial year
+• Action: Verify LRS utilization; disbursement may be deferred to next FY
+• Escalation: Compliance team
+
+REASON 8: Post-Dated Cheques (PDC) Not Received
+• Required for unsecured loans in some cases
+• Action: Submit PDCs to branch; physical verification may delay
+• Resolution: 3-5 days after PDC receipt and validation
+
+4. Escalation Matrix
+• Tier 1 (Branch/Relationship Manager): Standard queries, document follow-up
+• Tier 2 (Regional Ops): Delay > 7 days, e-NACH/reconciliation issues
+• Tier 3 (Central Ops/Compliance): Delay > 15 days, regulatory or FEMA issues
+
+5. Customer Action Checklist for Delayed Disbursement
+1. Verify e-NACH/mandate status in net banking
+2. Ensure PAN is linked to Aadhaar
+3. Confirm all documents submitted and acknowledged
+4. Check if institute has sent fee demand letter
+5. Contact branch with loan reference number for status
+6. Escalate to customer care if no response in 7 days

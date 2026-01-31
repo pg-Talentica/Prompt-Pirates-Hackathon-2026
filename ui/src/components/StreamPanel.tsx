@@ -60,30 +60,30 @@ export function StreamPanel({ events, status }: StreamPanelProps) {
                   <span className="stream-step-toggle">{expanded.has(i) ? "▼" : "▶"}</span>
                 </button>
                 {expanded.has(i) &&
-                  (event.tool_calls ?? (event.payload ? [event.payload] : [])).map(
-                    (tc: ToolCallPayload | Record<string, unknown>, j: number) => (
-                      <div key={j} className="stream-tool-detail">
-                        <strong>{(tc as ToolCallPayload).tool_name ?? "tool"}</strong>
+                  (event.tool_calls ?? (event.payload ? [event.payload as ToolCallPayload] : [])).map(
+                    (tc: ToolCallPayload, j: number) => (
+                        <div key={j} className="stream-tool-detail">
+                        <strong>{tc.tool_name ?? "tool"}</strong>
                         <div className="stream-tool-meta">
-                          {(tc as ToolCallPayload).duration_ms != null && (
-                            <span>{(tc as ToolCallPayload).duration_ms} ms</span>
+                          {tc.duration_ms != null && (
+                            <span>{tc.duration_ms} ms</span>
                           )}
-                          {(tc as ToolCallPayload).started_at && (
-                            <span>{(tc as ToolCallPayload).started_at}</span>
+                          {tc.started_at && (
+                            <span>{tc.started_at}</span>
                           )}
                         </div>
                         <details>
                           <summary>Input</summary>
-                          <pre>{JSON.stringify((tc as ToolCallPayload).input ?? tc, null, 2)}</pre>
+                          <pre>{JSON.stringify(tc.input ?? tc, null, 2)}</pre>
                         </details>
-                        {(tc as ToolCallPayload).result !== undefined && (
+                        {tc.result !== undefined && (
                           <details>
                             <summary>Result</summary>
-                            <pre>{JSON.stringify((tc as ToolCallPayload).result, null, 2)}</pre>
+                            <pre>{JSON.stringify(tc.result, null, 2)}</pre>
                           </details>
                         )}
-                        {(tc as ToolCallPayload).error && (
-                          <p className="stream-tool-error">{(tc as ToolCallPayload).error}</p>
+                        {tc.error && (
+                          <p className="stream-tool-error">{tc.error}</p>
                         )}
                       </div>
                     )

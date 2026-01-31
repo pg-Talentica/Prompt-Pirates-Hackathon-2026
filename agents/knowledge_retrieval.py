@@ -22,6 +22,6 @@ def knowledge_retrieval_agent(state: CoPilotState) -> dict[str, Any]:
     if not query:
         return {"retrieval_result": []}
 
-    results = retrieval_tool(query=query, k=5)
+    results = retrieval_tool(query=query, k=8)
     logger.info("Retrieval returned %d chunks", len(results))
     return {"retrieval_result": results}

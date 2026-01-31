@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Dict, Optional
 
 
 @dataclass
@@ -15,9 +15,9 @@ class GuardrailsResult:
     confidence: float
     reason: str
     no_answer: bool = False
-    details: dict[str, Any] | None = None
+    details: Optional[Dict[str, Any]] = None
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self) -> Dict[str, Any]:
         return {
             "safe": self.safe,
             "escalate": self.escalate,

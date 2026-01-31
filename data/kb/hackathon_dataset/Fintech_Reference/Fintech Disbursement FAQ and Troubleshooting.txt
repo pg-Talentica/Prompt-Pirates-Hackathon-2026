@@ -1,0 +1,71 @@
+Fintech Education Loan Disbursement – FAQ and Troubleshooting
+
+Common queries across Kredila, HDFC, SBI, ICICI and other education loan providers.
+
+1. Why is my loan not disbursed for 15+ days?
+
+Possible reasons (check in order):
+
+A. Repayment Mandate (e-NACH/e-Mandate) Not Active
+   • All banks require active NACH/mandate for EMI deduction before disbursement
+   • Solution: Complete mandate registration; verify status in net banking
+   • Typical resolution: 2-3 business days after mandate success
+
+B. Document Incomplete
+   • Fee demand letter from institution not received
+   • Signed agreement or e-sign pending
+   • Name mismatch between PAN/Aadhaar and admission letter
+   • Solution: Submit missing docs; Affidavit of Identity for name mismatch
+   • Resolution: 3-5 days after document receipt
+
+C. PAN Not Linked to Aadhaar
+   • RBI mandate for all financial transactions
+   • Solution: Link at incometax.gov.in
+   • Resolution: Same day
+
+D. Margin Money or Top-Up Pending
+   • For loans above unsecured limit, margin (5-15%) must be paid first
+   • Solution: Pay as per sanction letter
+   • Resolution: 1-2 days after payment
+
+E. CIBIL or Credit Issue
+   • New default in co-applicant or student
+   • Credit refresh required before each disbursement
+   • Solution: Resolve dues; wait 7-14 days for CIBIL update
+
+F. Institute Confirmation Delayed
+   • Bank verifies fee with institute
+   • Solution: Institute must send demand letter or confirmation
+   • Resolution: 5-7 days depending on institute
+
+G. Post-Dated Cheques (PDC)
+   • Required for unsecured loans
+   • Solution: Submit PDCs at branch
+   • Resolution: 3-5 days after validation
+
+H. LRS Limit (International Loans)
+   • Annual limit $250,000 USD
+   • Solution: Check utilization; may defer to next FY
+
+2. What documents are needed for disbursement?
+
+• Signed loan agreement (e-sign via Aadhaar/DigiLocker)
+• Active e-NACH or e-Mandate for EMI
+• Fee demand letter or invoice from institution
+• Institute bank account details (for direct transfer)
+• Post-dated cheques (if applicable)
+• CIBIL refresh within 24-48 hours of disbursement
+
+3. How long does disbursement take?
+
+• Kredila: Domestic 24-48 hours; International 48-72 hours
+• HDFC: 48-72 hours domestic; 72-96 hours international
+• SBI: 7-10 working days
+• ICICI: 48-72 hours domestic
+
+4. Whom to contact for delayed disbursement?
+
+• Start: Branch/Relationship Manager with loan reference number
+• Escalate: Customer care if no response in 7 days
+• Central grievance: Bank's grievance email for delay > 15 days
+• RBI Ombudsman: If bank does not resolve in 30 days

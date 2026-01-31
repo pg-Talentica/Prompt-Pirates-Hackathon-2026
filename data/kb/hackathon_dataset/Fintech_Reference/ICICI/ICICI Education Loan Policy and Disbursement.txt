@@ -1,0 +1,38 @@
+ICICI Bank Education Loan – Policy and Disbursement
+
+ICICI Bank offers education loans for studies in India and abroad under competitive terms.
+
+1. Loan Overview
+• Domestic: Up to INR 1 Crore for premier institutes
+• Unsecured: Up to INR 50 Lakhs (Tier-1); Up to INR 7.5 Lakhs (Tier-2) as per IBA
+• Interest: Repo Linked; 9.5% - 11.5% p.a.
+• Moratorium: Course duration + 6 months
+• Repayment: Up to 15 years
+
+2. Eligibility
+• Indian citizen; age 16-35
+• Admission to UGC/AICTE/NAAC recognized institution
+• Co-applicant (parent/guardian) with income proof
+• Clean credit history
+
+3. Disbursement Policy
+• Direct transfer to institution for fees
+• Installment-wise disbursement per semester
+• SLA: 48-72 hours for domestic after document completion
+• Requirements: Signed agreement, e-NACH, fee demand letter, CIBIL refresh
+
+4. Reasons for Disbursement Delay – ICICI Specific
+
+• e-NACH/E-mandate not active: Re-initiate mandate; disbursement blocked until active
+• Document incomplete: Demand letter, fee invoice, or institute confirmation pending
+• PAN-Aadhaar not linked: Mandatory; link immediately for same-day fix
+• Margin money pending: Pay 5-15% margin for loans above unsecured limit
+• CIBIL refresh pending: Credit check done 24-48 hours before disbursement
+• Institute verification: ICICI may verify fee directly; institute delay adds 3-5 days
+• Name mismatch: Affidavit of Identity if PAN/Aadhaar name differs from admission letter
+
+5. Contact for Disbursement Status
+• Branch Relationship Manager
+• Customer care: 1860-267-6767
+• iMobile app: Track loan status
+• Escalation: grievance@icicibank.com for delays > 10 days

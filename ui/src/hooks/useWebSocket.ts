@@ -4,7 +4,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { AgentStreamEvent } from "../types/stream";
+import type { AgentStreamEvent, ToolCallPayload } from "../types/stream";
 
 export type WebSocketStatus = "connecting" | "open" | "closed" | "error";
 
@@ -73,7 +73,7 @@ export function useWebSocket(
             timestamp: raw.timestamp ?? new Date().toISOString(),
           };
           if (raw.type === "tool_call" && raw.payload && !raw.tool_calls) {
-            event.tool_calls = [raw.payload as AgentStreamEvent["tool_calls"][0]];
+            event.tool_calls = [raw.payload as ToolCallPayload];
           }
           setEvents((prev) => [...prev, event]);
           setLastMessage(event);

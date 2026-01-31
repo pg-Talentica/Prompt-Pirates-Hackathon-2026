@@ -6,7 +6,7 @@ Single store with type: working | episodic | semantic.
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Literal
+from typing import Any, Dict, Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -18,9 +18,9 @@ class MemoryRecord(BaseModel):
 
     id: str
     type: MemoryType = Field(..., description="working | episodic | semantic")
-    session_id: str | None = Field(default=None, description="Required for working; optional for others")
+    session_id: Optional[str] = Field(default=None, description="Required for working; optional for others")
     content: str = Field(..., description="Text or JSON content")
-    metadata: dict[str, Any] = Field(default_factory=dict, description="Optional metadata")
+    metadata: Dict[str, Any] = Field(default_factory=dict, description="Optional metadata")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
@@ -31,13 +31,13 @@ class MemoryCreate(BaseModel):
     """Payload for creating a memory."""
 
     type: MemoryType
-    session_id: str | None = None
+    session_id: Optional[str] = None
     content: str
-    metadata: dict[str, Any] = Field(default_factory=dict)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
 
 
 class MemoryUpdate(BaseModel):
     """Payload for updating a memory (partial)."""
 
-    content: str | None = None
-    metadata: dict[str, Any] | None = None
+    content: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None

@@ -39,16 +39,31 @@ def retrieve(
     k: int = 5,
     persist_directory: str | Path = DEFAULT_PERSIST_DIR,
     api_key: str | None = None,
+    max_distance: float | None = None,
 ) -> list[dict[str, Any]]:
     """Retrieve top-k relevant chunks for a query, with source references.
 
     Returns a list of dicts with keys: text, source_file, chunk_index, start, end, distance.
-    Used by the Knowledge Retrieval Agent; retrieval happens before any response generation.
+    Results with distance > max_distance are discarded (out-of-context filtering).
     """
+    if max_distance is None:
+        try:
+            from api.config import get_settings
+            max_distance = get_settings().rag_max_distance
+        except Exception:
+            max_distance = 1.2
     store = get_vector_store(persist_directory=persist_directory, api_key=api_key)
     results = store.search(query=query, k=k)
-    logger.info("Retrieval query=%r k=%d -> %d results", query[:50], k, len(results))
-    return results
+    # Filter by relevance: discard chunks with distance > max_distance (L2; lower = better)
+    filtered = []
+    for r in results:
+        d = r.get("distance")
+        if d is None:
+            filtered.append(r)  # No distance = keep (e.g. some backends)
+        elif d <= max_distance:
+            filtered.append(r)
+    logger.info("Retrieval query=%r k=%d -> %d results (after relevance filter)", query[:50], k, len(filtered))
+    return filtered
 
 
 def _retrieval_tool_impl(query: str, k: int = 5) -> list[dict[str, Any]]:

@@ -22,6 +22,9 @@ COPY guardrails/ guardrails/
 COPY data/ data/
 COPY scripts/ scripts/
 
+# Ensure app user can write to data/ (SQLite memory.db, vector_store)
+RUN mkdir -p /app/data /app/data/vector_store 2>/dev/null || true && chown -R app:app /app/data
+
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 

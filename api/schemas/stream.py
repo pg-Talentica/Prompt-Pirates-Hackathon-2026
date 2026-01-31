@@ -6,7 +6,7 @@ Consumed by UI (Task-009) for high-level steps and expandable tool details.
 
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import Any, Dict, List, Literal, Optional
 
 # Event types sent over WebSocket
 StreamEventType = Literal[
@@ -48,10 +48,10 @@ def escalation_event(payload: dict[str, Any]) -> dict[str, Any]:
 def done_event(
     final_response: str,
     escalate: bool,
-    recommended_actions: list[dict[str, Any]],
-    intent_result: dict[str, Any] | None = None,
-    guardrails_result: dict[str, Any] | None = None,
-) -> dict[str, Any]:
+    recommended_actions: List[Dict[str, Any]],
+    intent_result: Optional[Dict[str, Any]] = None,
+    guardrails_result: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
     """Build done event: final response or escalation summary."""
     return {
         "type": "done",
@@ -65,7 +65,7 @@ def done_event(
     }
 
 
-def error_event(message: str, details: dict[str, Any] | None = None) -> dict[str, Any]:
+def error_event(message: str, details: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Build error event."""
     return {
         "type": "error",

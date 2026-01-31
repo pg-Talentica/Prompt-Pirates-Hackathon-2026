@@ -1,6 +1,6 @@
 """Memory CRUD API for the UI (list, get, update, delete)."""
 
-from typing import Literal
+from typing import Literal, Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
@@ -15,8 +15,8 @@ MemoryTypeQuery = Literal["working", "episodic", "semantic"]
 
 @router.get("")
 async def list_memories(
-    type_: MemoryTypeQuery | None = Query(None, alias="type"),
-    session_id: str | None = None,
+    type_: Optional[MemoryTypeQuery] = Query(None, alias="type"),
+    session_id: Optional[str] = None,
     limit: int = 100,
     offset: int = 0,
 ):

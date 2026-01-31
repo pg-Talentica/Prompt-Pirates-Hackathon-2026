@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/client.ts","./src/components/chatpanel.tsx","./src/components/memorypanel.tsx","./src/components/metricspanel.tsx","./src/components/streampanel.tsx","./src/components/index.ts","./src/hooks/usewebsocket.ts","./src/types/chat.ts","./src/types/memory.ts","./src/types/stream.ts"],"version":"5.6.3"}

@@ -1,0 +1,41 @@
+RBI Guidelines for Education Loans – Applicable to All Banks
+
+RBI (Reserve Bank of India) guidelines that apply to education loans offered by Kredila, HDFC, SBI, ICICI and all regulated lenders.
+
+1. IBA Model Education Loan Scheme
+• All banks follow the Indian Banks' Association (IBA) Model Scheme
+• Unsecured limits: Up to INR 7.5 Lakhs for recognized institutions
+• Unsecured limits for premier institutes (IITs, IIMs, etc.): Up to INR 40-50 Lakhs
+• Above limits: Collateral required as per bank policy
+
+2. Interest Rate
+• Floating rate linked to external benchmark (Repo, MCLR, EBR)
+• Transparency: KFS (Key Fact Statement) mandatory before disbursement
+• No hidden charges: Banks must disclose all fees upfront
+
+3. Moratorium Period
+• Course duration + 6 to 12 months post-employment
+• Simple interest during moratorium (some banks)
+• EMI starts after moratorium ends
+
+4. Tax Benefits – Section 80E
+• Interest paid on education loan deductible from income
+• Available for up to 8 years from start of repayment
+• Applies to loans for self, spouse, children
+
+5. Disbursement and Documentation
+• Direct disbursement to institution for fees
+• Banks require: Agreement, repayment mandate (NACH), fee demand letter
+• PAN-Aadhaar linking mandatory for all financial transactions
+• CIBIL check before sanction and disbursement
+
+6. Fair Practices Code (FPC)
+• No discrimination; transparent communication
+• Grievance redressal mechanism mandatory
+• RBI Ombudsman for unresolved complaints within 30 days
+
+7. LRS (Liberalised Remittance Scheme) for International Education
+• Annual limit: $250,000 USD per person
+• TCS (Tax Collected at Source): 0% for education loan funded; 5% above INR 10 Lakh for self-funded
+• Form A2 for outward remittance
+• Form 15CA/15CB for tax declaration on foreign remittances

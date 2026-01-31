@@ -10,7 +10,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from queue import Queue
-from typing import Any
+from typing import Any, Optional
 
 from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, Field
@@ -41,8 +41,8 @@ class ChatResponse(BaseModel):
     final_response: str
     escalate: bool
     recommended_actions: list = Field(default_factory=list)
-    intent_result: dict | None = None
-    guardrails_result: dict | None = None
+    intent_result: Optional[dict] = None
+    guardrails_result: Optional[dict] = None
 
 
 # --- REST: POST /api/chat ---
@@ -85,7 +85,7 @@ def _run_graph_stream(
         queue.put(("tool_call", ev))
 
     register_tool_event_callback(on_tool_event)
-    last_state: dict[str, Any] | None = None
+    last_state: Optional[dict] = None
     try:
         from agents import get_graph
         graph = get_graph()
