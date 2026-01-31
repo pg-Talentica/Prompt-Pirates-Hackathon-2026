@@ -1,0 +1,101 @@
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved config revert. Follow-up: update runbook.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as database failover. Mitigation involved config revert. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved cache clear. Follow-up: post-mortem scheduled.
+
+Incident Summary: On 2024-02-20, Data Pipeline experienced elevated error rates. Impact: some users affected. Duration: 1 hour 15 minutes. Root cause: third-party API outage. Resolution: failover to standby.
+
+Post-incident summary for incident INC-5702. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved cache clear. Follow-up: update runbook.
+
+Incident Summary: On 2024-04-05, Data Pipeline experienced partial outage. Impact: some users affected. Duration: 2 hours. Root cause: config change. Resolution: failover to standby.
+
+Post-incident summary for incident INC-5702. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved cache clear. Follow-up: post-mortem scheduled.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved rollback. Follow-up: update runbook.
+
+Incident Summary: On 2024-02-20, Data Pipeline experienced deployment failure. Impact: read-only mode. Duration: 1 hour 15 minutes. Root cause: config change. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5373. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved config revert. Follow-up: post-mortem scheduled.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-02-20 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-5702. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-03-10 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: update runbook.
+
+Incident Summary: On 2024-03-10, Data Pipeline experienced increased latency. Impact: read-only mode. Duration: 2 hours. Root cause: database failover. Resolution: rollback and fix.
+
+Incident Summary: On 2024-01-15, Data Pipeline experienced elevated error rates. Impact: EU region impacted. Duration: 45 minutes. Root cause: config change. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5373. Service Data Pipeline was affected between 2024-01-15 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: post-mortem scheduled.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Incident Summary: On 2024-03-10, Data Pipeline experienced increased latency. Impact: degraded performance. Duration: 45 minutes. Root cause: config change. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5702. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved config revert. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-02-20 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved cache clear. Follow-up: post-mortem scheduled.
+
+Incident Summary: On 2024-01-15, Data Pipeline experienced partial outage. Impact: degraded performance. Duration: 2 hours. Root cause: config change. Resolution: revert config and redeploy.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-03-10 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved config revert. Follow-up: update runbook.
+
+Post-incident summary for incident INC-5702. Service Data Pipeline was affected between 2024-02-20 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as config change. Mitigation involved rollback. Follow-up: add monitoring.
+
+Incident Summary: On 2024-04-05, Data Pipeline experienced partial outage. Impact: EU region impacted. Duration: 1 hour 15 minutes. Root cause: config change. Resolution: failover to standby.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-01-15 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Incident Summary: On 2024-03-10, Data Pipeline experienced increased latency. Impact: some users affected. Duration: 1 hour 15 minutes. Root cause: database failover. Resolution: failover to standby.
+
+Post-incident summary for incident INC-5373. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved rollback. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-5373. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-03-10 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved config revert. Follow-up: post-mortem scheduled.
+
+Incident Summary: On 2024-02-20, Data Pipeline experienced elevated error rates. Impact: read-only mode. Duration: 2 hours. Root cause: a bad deployment. Resolution: revert config and redeploy.
+
+Incident Summary: On 2024-02-20, Data Pipeline experienced deployment failure. Impact: some users affected. Duration: 45 minutes. Root cause: database failover. Resolution: rollback and fix.
+
+Incident Summary: On 2024-01-15, Data Pipeline experienced partial outage. Impact: degraded performance. Duration: 2 hours. Root cause: third-party API outage. Resolution: revert config and redeploy.
+
+Post-incident summary for incident INC-4868. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as config change. Mitigation involved cache clear. Follow-up: update runbook.
+
+Incident Summary: On 2024-04-05, Data Pipeline experienced deployment failure. Impact: some users affected. Duration: 45 minutes. Root cause: third-party API outage. Resolution: failover to standby.
+
+Incident Summary: On 2024-03-10, Data Pipeline experienced deployment failure. Impact: degraded performance. Duration: 45 minutes. Root cause: config change. Resolution: failover to standby.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved cache clear. Follow-up: post-mortem scheduled.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-02-20 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Incident Summary: On 2024-04-05, Data Pipeline experienced partial outage. Impact: read-only mode. Duration: 1 hour 15 minutes. Root cause: config change. Resolution: revert config and redeploy.
+
+Incident Summary: On 2024-01-15, Data Pipeline experienced partial outage. Impact: some users affected. Duration: 2 hours. Root cause: a bad deployment. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved rollback. Follow-up: add monitoring.
+
+Incident Summary: On 2024-02-20, Data Pipeline experienced elevated error rates. Impact: some users affected. Duration: 1 hour 15 minutes. Root cause: database failover. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5201. Service Data Pipeline was affected between 2024-01-15 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as database failover. Mitigation involved rollback. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Incident Summary: On 2024-04-05, Data Pipeline experienced deployment failure. Impact: degraded performance. Duration: 1 hour 15 minutes. Root cause: third-party API outage. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5373. Service Data Pipeline was affected between 2024-03-10 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Post-incident summary for incident INC-5702. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-03-10 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: add monitoring.
+
+Incident Summary: On 2024-03-10, Data Pipeline experienced deployment failure. Impact: EU region impacted. Duration: 2 hours. Root cause: config change. Resolution: failover to standby.
+
+Post-incident summary for incident INC-4868. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-01-15 16:00 UTC. Root cause was identified as database failover. Mitigation involved cache clear. Follow-up: update runbook.
+
+Post-incident summary for incident INC-3631. Service Data Pipeline was affected between 2024-02-20 14:00 UTC and 2024-02-20 16:00 UTC. Root cause was identified as third-party API outage. Mitigation involved config revert. Follow-up: add monitoring.
+
+Incident Summary: On 2024-03-10, Data Pipeline experienced deployment failure. Impact: some users affected. Duration: 1 hour 15 minutes. Root cause: database failover. Resolution: rollback and fix.
+
+Post-incident summary for incident INC-5373. Service Data Pipeline was affected between 2024-04-05 14:00 UTC and 2024-04-05 16:00 UTC. Root cause was identified as a bad deployment. Mitigation involved rollback. Follow-up: add monitoring.
+
+Incident Summary: On 2024-01-15, Data Pipeline experienced elevated error rates. Impact: EU region impacted. Duration: 1 hour 15 minutes. Root cause: a bad deployment. Resolution: rollback and fix.

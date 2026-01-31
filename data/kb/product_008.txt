@@ -1,0 +1,141 @@
+This document describes the API feature of Support Co-Pilot and how to use it for common tasks.
+
+Overview: API allows you to export reports and run ad-hoc queries. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Overview: API allows you to export reports and run ad-hoc queries. It is available in the Support Co-Pilot console under the Admin menu.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 1000 requests per request. Rate limits apply; see the API documentation for current quotas.
+
+Overview: API allows you to view metrics and create alerts. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Overview: API allows you to export reports and run ad-hoc queries. It is available in the Support Co-Pilot console under the Settings menu.
+
+Overview: API allows you to view metrics and create alerts. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Configuration: Set the following options in the config file or UI: timeout, retries, cache_ttl. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Troubleshooting: If you see Connection refused, check the service status page. Common causes include rate limits and network issues.
+
+Overview: API allows you to export reports and run ad-hoc queries. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Overview: API allows you to manage API keys and quotas. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 1000 requests per request. Rate limits apply; see the API documentation for current quotas.
+
+Troubleshooting: If you see Connection refused, check your plan limits. Common causes include rate limits and rate limits.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Overview: API allows you to manage API keys and quotas. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Troubleshooting: If you see Quota exceeded, check connectivity and firewall rules. Common causes include network issues and misconfiguration.
+
+Overview: API allows you to view metrics and create alerts. It is available in the Support Co-Pilot console under the Admin menu.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 100 MB payload per request. Rate limits apply; see the API documentation for current quotas.
+
+Configuration: Set the following options in the config file or UI: timeout, retries, cache_ttl. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Overview: API allows you to export reports and run ad-hoc queries. It is available in the Support Co-Pilot console under the Settings menu.
+
+Troubleshooting: If you see Timeout, check your plan limits. Common causes include rate limits and misconfiguration.
+
+Configuration: Set the following options in the config file or UI: timeout, retries, cache_ttl. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Overview: API allows you to manage API keys and quotas. It is available in the Support Co-Pilot console under the Admin menu.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Overview: API allows you to manage API keys and quotas. It is available in the Support Co-Pilot console under the Admin menu.
+
+Troubleshooting: If you see Quota exceeded, check the service status page. Common causes include network issues and rate limits.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Troubleshooting: If you see Quota exceeded, check the service status page. Common causes include misconfiguration and network issues.
+
+Troubleshooting: If you see Quota exceeded, check connectivity and firewall rules. Common causes include rate limits and network issues.
+
+Troubleshooting: If you see Quota exceeded, check the service status page. Common causes include network issues and network issues.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Configuration: Set the following options in the config file or UI: timeout, retries, cache_ttl. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Troubleshooting: If you see Quota exceeded, check your plan limits. Common causes include rate limits and misconfiguration.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Troubleshooting: If you see Connection refused, check your plan limits. Common causes include rate limits and rate limits.
+
+Troubleshooting: If you see Timeout, check your plan limits. Common causes include rate limits and network issues.
+
+Overview: API allows you to view metrics and create alerts. It is available in the Support Co-Pilot console under the Admin menu.
+
+Troubleshooting: If you see Quota exceeded, check your plan limits. Common causes include misconfiguration and network issues.
+
+Troubleshooting: If you see Quota exceeded, check your plan limits. Common causes include network issues and misconfiguration.
+
+Configuration: Set the following options in the config file or UI: timeout, retries, cache_ttl. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Overview: API allows you to manage API keys and quotas. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Limits: Maximum 100 MB payload per request. Rate limits apply; see the API documentation for current quotas.
+
+Troubleshooting: If you see Timeout, check the service status page. Common causes include misconfiguration and rate limits.
+
+Limits: Maximum 1000 requests per request. Rate limits apply; see the API documentation for current quotas.
+
+Troubleshooting: If you see Quota exceeded, check the service status page. Common causes include misconfiguration and rate limits.
+
+Overview: API allows you to view metrics and create alerts. It is available in the Support Co-Pilot console under the Admin menu.
+
+Troubleshooting: If you see Timeout, check connectivity and firewall rules. Common causes include rate limits and network issues.
+
+Troubleshooting: If you see Timeout, check your plan limits. Common causes include rate limits and network issues.
+
+Configuration: Set the following options in the config file or UI: log_level, sampling_rate. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Configuration: Set the following options in the config file or UI: theme, language. Default values are suitable for most environments; tune only if you need higher throughput.
+
+Overview: API allows you to manage API keys and quotas. It is available in the Support Co-Pilot console under the Settings menu.
+
+Limits: Maximum 50 concurrent connections per request. Rate limits apply; see the API documentation for current quotas.
+
+Overview: API allows you to view metrics and create alerts. It is available in the Support Co-Pilot console under the Analytics menu.
+
+Limits: Maximum 100 MB payload per request. Rate limits apply; see the API documentation for current quotas.

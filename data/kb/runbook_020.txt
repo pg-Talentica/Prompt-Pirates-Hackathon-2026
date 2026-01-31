@@ -1,0 +1,123 @@
+This runbook describes the procedure for restoring service after an outage in the Dashboard environment.
+
+Step 2: Run the diagnostic command: `health-check --full`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Step 4: If the issue matches known pattern P003, apply the mitigation from section 4. Otherwise, escalate to the on-call engineer with the captured logs.
+
+Prerequisites: Ensure you have access to the monitoring dashboard and the role operator. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Rollback: If the change causes regression, revert using `restore from backup` and notify the team in #incidents.
+
+Step 2: Run the diagnostic command: `audit-logs --since 1h`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Prerequisites: Ensure you have access to the api-gateway dashboard and the role viewer. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Prerequisites: Ensure you have access to the monitoring dashboard and the role admin. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 1: Log into the api-gateway console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_AUTH).
+
+Step 2: Run the diagnostic command: `diagnose --env prod`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Step 3: Compare the output with the baseline stored in the knowledge base. Look for deviations in response time or response time.
+
+Prerequisites: Ensure you have access to the billing dashboard and the role operator. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Prerequisites: Ensure you have access to the monitoring dashboard and the role operator. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Rollback: If the change causes regression, revert using `restore from backup` and notify the team in #incidents.
+
+Prerequisites: Ensure you have access to the billing dashboard and the role operator. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 5: After applying the fix, run the health check endpoint: `/live`. Confirm that the response code is 200 and latency is within SLA.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in #ops.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in #ops.
+
+Prerequisites: Ensure you have access to the orchestration dashboard and the role admin. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Rollback: If the change causes regression, revert using `restore from backup` and notify the team in #ops.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in PagerDuty.
+
+Step 5: After applying the fix, run the health check endpoint: `/ready`. Confirm that the response code is 200 and latency is within SLA.
+
+Prerequisites: Ensure you have access to the orchestration dashboard and the role viewer. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 5: After applying the fix, run the health check endpoint: `/health`. Confirm that the response code is 200 and latency is within SLA.
+
+Prerequisites: Ensure you have access to the api-gateway dashboard and the role admin. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Prerequisites: Ensure you have access to the monitoring dashboard and the role operator. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 1: Log into the orchestration console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_TIMEOUT).
+
+Step 5: After applying the fix, run the health check endpoint: `/ready`. Confirm that the response code is 200 and latency is within SLA.
+
+Step 5: After applying the fix, run the health check endpoint: `/health`. Confirm that the response code is 200 and latency is within SLA.
+
+Prerequisites: Ensure you have access to the monitoring dashboard and the role admin. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 1: Log into the monitoring console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_QUOTA).
+
+Step 1: Log into the billing console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_QUOTA).
+
+Step 5: After applying the fix, run the health check endpoint: `/live`. Confirm that the response code is 200 and latency is within SLA.
+
+Step 1: Log into the api-gateway console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_502).
+
+Step 2: Run the diagnostic command: `diagnose --env prod`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Step 5: After applying the fix, run the health check endpoint: `/ready`. Confirm that the response code is 200 and latency is within SLA.
+
+Prerequisites: Ensure you have access to the billing dashboard and the role viewer. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 4: If the issue matches known pattern P002, apply the mitigation from section 4. Otherwise, escalate to the on-call engineer with the captured logs.
+
+Step 3: Compare the output with the baseline stored in the knowledge base. Look for deviations in CPU usage or error rate.
+
+Prerequisites: Ensure you have access to the api-gateway dashboard and the role operator. Verify that the incident ticket is assigned and the severity is set correctly.
+
+Step 1: Log into the monitoring console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_AUTH).
+
+Step 5: After applying the fix, run the health check endpoint: `/live`. Confirm that the response code is 200 and latency is within SLA.
+
+Step 3: Compare the output with the baseline stored in the knowledge base. Look for deviations in CPU usage or error rate.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in #incidents.
+
+Step 4: If the issue matches known pattern P001, apply the mitigation from section 4. Otherwise, escalate to the on-call engineer with the captured logs.
+
+Step 4: If the issue matches known pattern P001, apply the mitigation from section 4. Otherwise, escalate to the on-call engineer with the captured logs.
+
+Step 1: Log into the api-gateway console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_QUOTA).
+
+Step 2: Run the diagnostic command: `diagnose --env prod`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Step 5: After applying the fix, run the health check endpoint: `/health`. Confirm that the response code is 200 and latency is within SLA.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in PagerDuty.
+
+Step 3: Compare the output with the baseline stored in the knowledge base. Look for deviations in response time or CPU usage.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in #incidents.
+
+Step 4: If the issue matches known pattern P001, apply the mitigation from section 4. Otherwise, escalate to the on-call engineer with the captured logs.
+
+Rollback: If the change causes regression, revert using `revert --deploy id` and notify the team in #incidents.
+
+Step 5: After applying the fix, run the health check endpoint: `/ready`. Confirm that the response code is 200 and latency is within SLA.
+
+Step 1: Log into the monitoring console and navigate to the section indicated in the alert. Note the timestamp and any error codes displayed (e.g. ERR_TIMEOUT).
+
+Step 5: After applying the fix, run the health check endpoint: `/live`. Confirm that the response code is 200 and latency is within SLA.
+
+Step 2: Run the diagnostic command: `health-check --full`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Step 3: Compare the output with the baseline stored in the knowledge base. Look for deviations in response time or error rate.
+
+Step 2: Run the diagnostic command: `diagnose --env prod`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.
+
+Step 5: After applying the fix, run the health check endpoint: `/health`. Confirm that the response code is 200 and latency is within SLA.
+
+Step 2: Run the diagnostic command: `audit-logs --since 1h`. Capture the full output to a file for later analysis. If the command times out, increase the timeout value in the config.

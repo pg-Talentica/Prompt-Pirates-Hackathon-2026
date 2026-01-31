@@ -1,0 +1,27 @@
+# Git and env
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+
+# Python
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+*.egg-info
+
+# Node (UI deps installed in container)
+ui/node_modules
+ui/dist
+
+# IDE and docs
+.idea
+.vscode
+*.md
+!README.md
+
+# Tasks (not needed in image)
+tasks

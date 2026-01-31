@@ -1,0 +1,32 @@
+# Support Co-Pilot – API (FastAPI)
+# Build: docker build -f Dockerfile.api -t support-co-pilot-api .
+# Run: docker run -p 8000:8000 --env-file .env support-co-pilot-api
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Non-root user for security
+RUN groupadd --gid 1000 app && useradd --uid 1000 --gid app --shell /bin/bash app
+
+# Dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Application
+COPY api/ api/
+COPY agents/ agents/
+COPY tools/ tools/
+COPY memory/ memory/
+
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+USER app
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')" || exit 1
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
