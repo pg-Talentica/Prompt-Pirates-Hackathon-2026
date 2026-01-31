@@ -18,6 +18,9 @@ COPY api/ api/
 COPY agents/ agents/
 COPY tools/ tools/
 COPY memory/ memory/
+COPY guardrails/ guardrails/
+COPY data/ data/
+COPY scripts/ scripts/
 
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1

@@ -35,6 +35,10 @@ include = ["api*", "agents*", "tools*", "memory*"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+markers = [
+    "integration: marks tests as integration (full pipeline with mocks); run with pytest -m integration",
+]
+addopts = "-v --tb=short"
 
 [tool.ruff]
 line-length = 100

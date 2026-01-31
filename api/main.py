@@ -1,6 +1,6 @@
 """FastAPI application entrypoint.
 
-Serves REST and WebSocket endpoints; agent graph and streaming will be wired in later tasks.
+Serves REST and WebSocket endpoints; chat/ticket and WebSocket streaming (Task-008).
 """
 
 import logging
@@ -10,6 +10,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.config import get_settings
+from api.routes import chat as chat_routes
+from api.routes import memory as memory_routes
+from api.routes import sessions as sessions_routes
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +49,10 @@ def create_app() -> FastAPI:
     async def health():
         """Health check for load balancers and Docker."""
         return {"status": "ok", "service": "support-co-pilot-api"}
+
+    app.include_router(memory_routes.router, prefix="/api")
+    app.include_router(chat_routes.router, prefix="/api")
+    app.include_router(sessions_routes.router, prefix="/api")
 
     return app
 

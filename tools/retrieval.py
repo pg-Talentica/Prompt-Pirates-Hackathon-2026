@@ -11,6 +11,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
+from tools.observability import wrap_tool
 from tools.vector_store import VectorStore
 
 logger = logging.getLogger(__name__)
@@ -50,17 +51,15 @@ def retrieve(
     return results
 
 
-def retrieval_tool(
-    query: str,
-    k: int = 5,
-) -> list[dict[str, Any]]:
-    """Tool interface for agents: same as retrieve() with defaults.
+def _retrieval_tool_impl(query: str, k: int = 5) -> list[dict[str, Any]]:
+    """Internal: retrieve with defaults (no observability)."""
+    return retrieve(query=query, k=k)
 
-    Each result includes:
-    - text: chunk content
-    - source_file: e.g. runbook_001.txt
-    - chunk_index: 0-based index in that file
-    - start, end: character offsets (for section refs)
-    - distance: similarity distance (lower = more similar) if available
-    """
+
+# Observable-wrapped tool for agents (logs input, execution, result; streamable to UI)
+retrieval_tool = wrap_tool("retrieval", _retrieval_tool_impl)
+
+
+def retrieval_tool_raw(query: str, k: int = 5) -> list[dict[str, Any]]:
+    """Retrieve without observability (e.g. for tests). Same as retrieve(query, k)."""
     return retrieve(query=query, k=k)

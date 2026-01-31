@@ -4,9 +4,9 @@ All config is read from env; no hardcoded secrets. See .env.example for required
 """
 
 from functools import lru_cache
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -33,6 +33,30 @@ class Settings(BaseSettings):
         default="development", description="Runtime environment"
     )
     log_level: str = Field(default="INFO", description="Logging level (DEBUG, INFO, WARNING, ERROR)")
+
+    # Guardrails (Task-006): no hardcoded phrases; API + config only
+    guardrails_confidence_threshold: float = Field(
+        default=0.7,
+        ge=0.0,
+        le=1.0,
+        description="When confidence below this, route to escalation",
+    )
+    guardrails_escalate_on_no_answer: bool = Field(
+        default=True,
+        description="When response is structured no_answer (I don't know), escalate",
+    )
+    guardrails_escalation_policy: str = Field(
+        default="[]",
+        description="JSON array of rules e.g. [{\"when\": \"no_answer\", \"then\": \"escalate\"}]",
+    )
+
+    @field_validator("guardrails_escalation_policy", mode="before")
+    @classmethod
+    def parse_escalation_policy(cls, v: Any) -> str:
+        if isinstance(v, str):
+            return v
+        import json
+        return json.dumps(v) if v is not None else "[]"
 
 
 @lru_cache
