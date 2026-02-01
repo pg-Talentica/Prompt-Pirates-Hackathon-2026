@@ -20,9 +20,21 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown lifecycle."""
+    import os
     settings = get_settings()
     logger.info("Starting Support Co-Pilot API (env=%s)", settings.environment)
+    # Langfuse: set env so get_client() picks up credentials
+    if settings.langfuse_secret_key and settings.langfuse_public_key:
+        os.environ.setdefault("LANGFUSE_PUBLIC_KEY", settings.langfuse_public_key)
+        os.environ.setdefault("LANGFUSE_SECRET_KEY", settings.langfuse_secret_key)
+        os.environ.setdefault("LANGFUSE_BASE_URL", settings.langfuse_base_url)
+        logger.info("Langfuse observability enabled")
     yield
+    try:
+        from tools.langfuse_observability import flush_langfuse
+        flush_langfuse()
+    except Exception:
+        pass
     logger.info("Shutting down Support Co-Pilot API")
 
 

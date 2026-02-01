@@ -1,9 +1,108 @@
+/* Design system & base styles */
 :root {
-  font-family: system-ui, -apple-system, sans-serif;
+  /* Typography */
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #1a1a1a;
-  background-color: #fafafa;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Light mode – clean, high-contrast palette */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-muted: #dbeafe;
+  --color-success: #059669;
+  --color-success-muted: #d1fae5;
+  --color-warning: #d97706;
+  --color-warning-muted: #fef3c7;
+  --color-error: #dc2626;
+  --color-error-muted: #fee2e2;
+  --color-escalation: #b91c1c;
+  --color-escalation-muted: #fef2f2;
+  --color-escalation-border: #fca5a5;
+  --color-escalation-soft: #fecaca;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-light: #64748b;
+  --color-bg: #f1f5f9;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-border: #e2e8f0;
+  --color-border-hover: #cbd5e1;
+  --color-shadow: rgba(15, 23, 42, 0.06);
+  --color-shadow-lg: rgba(15, 23, 42, 0.1);
+  /* Semantic – tabs, buttons, messages */
+  --color-tab-text: #334155;
+  --color-tab-text-hover: #0f172a;
+  --color-tab-active-bg: #f97316;
+  --color-tab-active-text: #ffffff;
+  --color-message-user-bg: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #172554 100%);
+  --color-message-user-border: #3b82f6;
+  --color-message-user-text: #eff6ff;
+  --color-accent-gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --color-accent-gradient-hover: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+  --color-accent-soft: rgba(139, 92, 246, 0.15);
+  --color-accent-glow: rgba(139, 92, 246, 0.35);
+  --color-hover-surface: rgba(15, 23, 42, 0.04);
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --space-2xl: 2rem;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+}
+
+/* Dark mode – comfortable contrast, coral/slate accents */
+[data-theme="dark"] {
+  --color-primary: #f3a097;
+  --color-primary-hover: #f9b8b0;
+  --color-primary-muted: rgba(243, 160, 151, 0.18);
+  --color-success: #34d399;
+  --color-success-muted: rgba(52, 211, 153, 0.18);
+  --color-warning: #fbbf24;
+  --color-warning-muted: rgba(251, 191, 36, 0.18);
+  --color-error: #f87171;
+  --color-error-muted: rgba(248, 113, 113, 0.18);
+  --color-escalation: #f3a097;
+  --color-escalation-muted: rgba(243, 160, 151, 0.2);
+  --color-escalation-border: #c4847a;
+  --color-escalation-soft: rgba(243, 160, 151, 0.25);
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-text-light: #64748b;
+  --color-bg: #0f1115;
+  --color-bg-card: #16181d;
+  --color-bg-elevated: #1c1f26;
+  --color-border: #2d3340;
+  --color-border-hover: #475569;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-shadow-lg: rgba(0, 0, 0, 0.5);
+  /* Semantic – dark mode */
+  --color-tab-text: #94a3b8;
+  --color-tab-text-hover: #f1f5f9;
+  --color-tab-active-bg: #ea580c;
+  --color-tab-active-text: #ffffff;
+  --color-message-user-bg: linear-gradient(135deg, #1e3a5f 0%, #1e293b 50%, #0f172a 100%);
+  --color-message-user-border: #334155;
+  --color-message-user-text: #e2e8f0;
+  --color-accent-gradient: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
+  --color-accent-gradient-hover: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --color-accent-soft: rgba(167, 139, 250, 0.2);
+  --color-accent-glow: rgba(167, 139, 250, 0.4);
+  --color-hover-surface: rgba(255, 255, 255, 0.06);
 }
 
 * {
@@ -13,4 +112,80 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideInUp var(--transition-normal) ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--transition-normal) ease-out forwards;
+}
+
+.icon-spin {
+  animation: spin 1s linear infinite;
 }

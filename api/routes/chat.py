@@ -54,11 +54,15 @@ async def chat(req: ChatRequest):
     For live agent steps and tool calls, use WebSocket /api/chat/ws."""
     try:
         from agents import get_graph
+        from tools.langfuse_observability import trace_request, update_trace_outcome
+
         graph = get_graph()
-        state = graph.invoke(
-            {"query": req.query.strip(), "session_id": req.session_id},
-            config={"configurable": {"thread_id": req.session_id}},
-        )
+        with trace_request(req.query.strip(), req.session_id) as trace_ctx:
+            state = graph.invoke(
+                {"query": req.query.strip(), "session_id": req.session_id},
+                config={"configurable": {"thread_id": req.session_id}},
+            )
+            update_trace_outcome(trace_ctx, state)
         return ChatResponse(
             final_response=state.get("final_response", ""),
             escalate=state.get("escalate", False),
@@ -88,23 +92,29 @@ def _run_graph_stream(
     last_state: Optional[dict] = None
     try:
         from agents import get_graph
+        from tools.langfuse_observability import trace_request
+
         graph = get_graph()
         config = {"configurable": {"thread_id": session_id}}
         inputs = {"query": query.strip(), "session_id": session_id}
-        stream_mode: list[str] = ["updates", "values"]
-        try:
-            stream_iter = graph.stream(inputs, stream_mode=stream_mode, config=config)
-        except TypeError:
-            stream_iter = graph.stream(inputs, stream_mode="updates", config=config)
-            stream_mode = ["updates"]
-        for event in stream_iter:
-            if isinstance(event, (list, tuple)) and len(event) == 2:
-                mode, chunk = event[0], event[1]
-            else:
-                mode, chunk = "updates", event
-            if mode == "values":
-                last_state = chunk if isinstance(chunk, dict) else last_state
-            queue.put(("stream", mode, chunk))
+        with trace_request(query.strip(), session_id) as trace_ctx:
+            stream_mode = ["updates", "values"]
+            try:
+                stream_iter = graph.stream(inputs, stream_mode=stream_mode, config=config)
+            except TypeError:
+                stream_iter = graph.stream(inputs, stream_mode="updates", config=config)
+                stream_mode = ["updates"]
+            for event in stream_iter:
+                if isinstance(event, (list, tuple)) and len(event) == 2:
+                    mode, chunk = event[0], event[1]
+                else:
+                    mode, chunk = "updates", event
+                if mode == "values":
+                    last_state = chunk if isinstance(chunk, dict) else last_state
+                queue.put(("stream", mode, chunk))
+            if last_state is not None:
+                from tools.langfuse_observability import update_trace_outcome
+                update_trace_outcome(trace_ctx, last_state)
     except Exception as e:
         logger.exception("Graph stream error: %s", e)
         queue.put(("error", str(e)))

@@ -19,6 +19,7 @@ from agents.memory_agent import memory_agent
 from agents.reasoning import reasoning_agent
 from agents.response_synthesis import response_synthesis_agent
 from agents.guardrails_agent import guardrails_agent
+from tools.langfuse_observability import trace_agent
 
 try:
     from langgraph.graph import StateGraph, START, END
@@ -33,8 +34,10 @@ except ImportError:
         StateGraph = None  # type: ignore
 
 
-def _route_after_ingestion(state: CoPilotState) -> Literal["planner", "escalate"]:
-    """If already escalated at ingestion, skip to escalate; else continue to planner."""
+def _route_after_ingestion(state: CoPilotState) -> Literal["planner", "escalate", "decline"]:
+    """Harmful input → decline (polite message); else continue to planner."""
+    if state.get("final_response") and not state.get("input_guardrails_result", {}).get("safe", True):
+        return "decline"
     if state.get("escalate"):
         return "escalate"
     return "planner"
@@ -59,6 +62,11 @@ def _terminal_escalate(state: CoPilotState) -> dict:
     return {"final_response": "Your request has been escalated for further assistance."}
 
 
+def _terminal_decline(state: CoPilotState) -> dict:
+    """Terminal node (Decline). Polite decline message, no escalation."""
+    return {}
+
+
 def build_graph():
     """Build and compile the Support Co-Pilot graph."""
     if StateGraph is None:
@@ -66,24 +74,25 @@ def build_graph():
 
     builder = StateGraph(CoPilotState)
 
-    # Nodes (each agent in its own module)
-    builder.add_node("ingestion", ingestion_agent)
-    builder.add_node("planner", planner_agent)
-    builder.add_node("intent", intent_agent)
-    builder.add_node("retrieval", knowledge_retrieval_agent)
-    builder.add_node("memory", memory_agent)
-    builder.add_node("reasoning", reasoning_agent)
-    builder.add_node("synthesis", response_synthesis_agent)
-    builder.add_node("guardrails", guardrails_agent)
+    # Nodes (each agent instrumented for Langfuse observability)
+    builder.add_node("ingestion", trace_agent(ingestion_agent, "ingestion"))
+    builder.add_node("planner", trace_agent(planner_agent, "planner"))
+    builder.add_node("intent", trace_agent(intent_agent, "intent"))
+    builder.add_node("retrieval", trace_agent(knowledge_retrieval_agent, "retrieval"))
+    builder.add_node("memory", trace_agent(memory_agent, "memory"))
+    builder.add_node("reasoning", trace_agent(reasoning_agent, "reasoning"))
+    builder.add_node("synthesis", trace_agent(response_synthesis_agent, "synthesis"))
+    builder.add_node("guardrails", trace_agent(guardrails_agent, "guardrails"))
     builder.add_node("response", _terminal_response)
     builder.add_node("escalate", _terminal_escalate)
+    builder.add_node("decline", _terminal_decline)
 
-    # Serial: START → ingestion; then conditional (early escalate or planner)
+    # Serial: START → ingestion; then conditional (decline | escalate | planner)
     builder.add_edge(START, "ingestion")
     builder.add_conditional_edges(
         "ingestion",
         _route_after_ingestion,
-        path_map={"planner": "planner", "escalate": "escalate"},
+        path_map={"planner": "planner", "escalate": "escalate", "decline": "decline"},
     )
 
     # Parallel: planner → intent, retrieval, memory (all three run)
@@ -106,6 +115,7 @@ def build_graph():
     )
     builder.add_edge("response", END)
     builder.add_edge("escalate", END)
+    builder.add_edge("decline", END)
 
     return builder.compile()
 

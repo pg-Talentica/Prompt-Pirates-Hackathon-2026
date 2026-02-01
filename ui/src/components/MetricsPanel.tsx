@@ -4,6 +4,7 @@
 
 import { useMemo } from "react";
 import type { AgentStreamEvent, DonePayload } from "../types/stream";
+import { IconActivity } from "./Icons";
 
 interface MetricsPanelProps {
   events: AgentStreamEvent[];
@@ -32,7 +33,10 @@ export function MetricsPanel({ events }: MetricsPanelProps) {
 
   return (
     <div className="metrics-panel">
-      <h3>Metrics</h3>
+      <h3 className="metrics-panel-header">
+        <IconActivity size={18} />
+        <span>Metrics</span>
+      </h3>
       <ul className="metrics-list">
         <li>
           <span className="metrics-label">Latency</span>

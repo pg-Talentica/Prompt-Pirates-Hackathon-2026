@@ -12,13 +12,14 @@ from agents.state import CoPilotState
 
 @patch("agents.intent._call_llm")
 def test_intent_returns_classification(mock_llm: object, sample_state: CoPilotState) -> None:
-    """Intent agent returns intent_result with intent, urgency, sla_risk."""
-    mock_llm.return_value = '{"intent": "howto", "urgency": "medium", "sla_risk": "low"}'
+    """Intent agent returns intent_result with intent, urgency, sla_risk, requires_human_escalation."""
+    mock_llm.return_value = '{"intent": "howto", "urgency": "medium", "sla_risk": "low", "requires_human_escalation": false}'
     out = intent_agent(sample_state)
     assert "intent_result" in out
     assert out["intent_result"]["intent"] == "howto"
     assert out["intent_result"]["urgency"] == "medium"
     assert out["intent_result"]["sla_risk"] == "low"
+    assert out["intent_result"]["requires_human_escalation"] is False
     mock_llm.assert_called_once()
 
 
@@ -39,3 +40,4 @@ def test_intent_fallback_on_invalid_json(mock_llm: object, sample_state: CoPilot
     assert out["intent_result"]["intent"] == "unknown"
     assert out["intent_result"]["urgency"] == "medium"
     assert out["intent_result"]["sla_risk"] == "low"
+    assert out["intent_result"]["requires_human_escalation"] is False

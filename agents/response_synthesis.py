@@ -19,11 +19,11 @@ logger = logging.getLogger(__name__)
 def _call_llm(prompt: str, system: str | None = None) -> str:
     try:
         from api.config import get_settings
-        from openai import OpenAI
+        from tools.langfuse_observability import get_openai_client
         settings = get_settings()
         if not settings.llm_api_key:
             return "I don't have enough context to answer. Please provide more details or contact support."
-        client = OpenAI(api_key=settings.llm_api_key)
+        client = get_openai_client()
         messages = []
         if system:
             messages.append({"role": "system", "content": system})
@@ -61,7 +61,7 @@ def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
         logger.info("No retrieval context for query; returning out-of-context response")
         return {
             "draft_response": OUT_OF_CONTEXT_MESSAGE,
-            "recommended_actions": [{"action": "escalate", "description": "Query outside knowledge base scope", "execute_stub": True}],
+            "recommended_actions": [{"description": "Ask about education loans, eligibility, or disbursement."}],
         }
 
     # Stricter relevance gate: best result must be within confidence threshold
@@ -77,7 +77,7 @@ def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
             logger.info("Best retrieval distance %.3f > %.2f; returning out-of-context", best_distance, conf_threshold)
             return {
                 "draft_response": OUT_OF_CONTEXT_MESSAGE,
-                "recommended_actions": [{"action": "escalate", "description": "Query not relevant to knowledge base", "execute_stub": True}],
+                "recommended_actions": [{"description": "Try rephrasing your question about loans or eligibility."}],
             }
 
     # Reference retrieved context (mandatory)
@@ -100,7 +100,8 @@ def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
 
     # Stub: recommended actions (execute path later)
     recommended_actions = [
-        {"action": "recommend", "description": "Review and recommend next steps", "execute_stub": True},
+        {"description": "Ask a follow-up question if you need more details."},
+        {"description": "Contact support if you need personalized assistance."},
     ]
 
     # Observability (dashed edge): emit synthesis event

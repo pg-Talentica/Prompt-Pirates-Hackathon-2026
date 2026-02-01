@@ -38,7 +38,11 @@ def _mock_memory_read(*args: object, **kwargs: object) -> list:
 
 
 def _mock_llm_intent(*args: object, **kwargs: object) -> str:
-    return '{"intent": "howto", "urgency": "medium", "sla_risk": "low"}'
+    return '{"intent": "howto", "urgency": "medium", "sla_risk": "low", "requires_human_escalation": false}'
+
+
+def _mock_llm_intent_escalate(*args: object, **kwargs: object) -> str:
+    return '{"intent": "loan_issue", "urgency": "high", "sla_risk": "high", "requires_human_escalation": true}'
 
 
 def _mock_llm_reasoning(*args: object, **kwargs: object) -> str:
@@ -88,20 +92,29 @@ def test_happy_path(
 
 
 @pytest.mark.integration
-@patch("agents.ingestion.policy_check", side_effect=_mock_policy_escalate)
+@patch("agents.response_synthesis._call_llm", side_effect=_mock_llm_synthesis)
+@patch("agents.reasoning._call_llm", side_effect=_mock_llm_reasoning)
+@patch("agents.intent._call_llm", side_effect=_mock_llm_intent_escalate)
+@patch("agents.memory_agent.memory_read_tool", side_effect=_mock_memory_read)
+@patch("agents.knowledge_retrieval.retrieval_tool", side_effect=_mock_retrieval)
+@patch("agents.ingestion.policy_check", side_effect=_mock_policy_safe)
 def test_escalation_path(
-    mock_policy: object,
+    mock_ingestion: object,
+    mock_retrieval: object,
+    mock_memory: object,
+    mock_intent: object,
+    mock_reasoning: object,
+    mock_synthesis: object,
 ) -> None:
-    """Escalation path: input guardrails trigger escalate → response marked escalated."""
+    """Escalation path: query requires human (loan+urgent) → response marked escalated."""
     graph = get_graph()
     state = graph.invoke(
-        {"query": "Sensitive or unsafe input", "session_id": "integration-escalate"},
+        {"query": "My loan disbursement is stuck, I need to speak to an agent", "session_id": "integration-escalate"},
         config={"configurable": {"thread_id": "integration-escalate"}},
     )
     assert state.get("escalate") is True
     assert state.get("final_response")
     assert "escalat" in state["final_response"].lower() or "assistance" in state["final_response"].lower()
-    mock_policy.assert_called_once()
 
 
 @pytest.mark.integration

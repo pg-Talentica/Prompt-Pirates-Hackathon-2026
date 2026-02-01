@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     llm_api_key: str = Field(default="", description="API key for the LLM provider")
     model: str = Field(default="gpt-4o-mini", description="Model name for all agents")
 
+    # Langfuse observability (optional; env: LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, LANGFUSE_BASE_URL)
+    langfuse_public_key: str = Field(default="", description="Langfuse public key (pk-lf-...)")
+    langfuse_secret_key: str = Field(default="", description="Langfuse secret key (sk-lf-...)")
+    langfuse_base_url: str = Field(default="https://cloud.langfuse.com", description="Langfuse host URL")
+
     # Server
     api_host: str = Field(default="0.0.0.0", description="Bind host for the API server")
     api_port: int = Field(default=8000, ge=1, le=65535, description="Port for the API server")

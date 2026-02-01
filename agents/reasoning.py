@@ -19,11 +19,11 @@ DEFAULT_DB_PATH = "data/memory.db"
 def _call_llm(prompt: str, system: str | None = None) -> str:
     try:
         from api.config import get_settings
-        from openai import OpenAI
+        from tools.langfuse_observability import get_openai_client
         settings = get_settings()
         if not settings.llm_api_key:
             return "Unable to correlate (no LLM configured)."
-        client = OpenAI(api_key=settings.llm_api_key)
+        client = get_openai_client()
         messages = []
         if system:
             messages.append({"role": "system", "content": system})

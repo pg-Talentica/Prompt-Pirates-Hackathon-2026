@@ -111,9 +111,8 @@ def _detect_no_answer(text: str, patterns: list[str] | None = None) -> bool:
 def check_input(text: str, api_key: str | None = None) -> GuardrailsResult:
     """Run guardrails on raw user input (after ingestion).
 
-    Use this immediately after ingestion to block or escalate before any
-    agent processing if the input is unsafe. Uses content-safety API;
-    no hardcoded list of phrases.
+    Use this immediately after ingestion to block before any agent processing
+    if the input is unsafe. Harmful content: polite decline, NO escalation.
     """
     config = _get_config()
     key = api_key or (config.llm_api_key if config else None) or ""
@@ -125,15 +124,8 @@ def check_input(text: str, api_key: str | None = None) -> GuardrailsResult:
         reason = "moderation_skipped_no_key"
     elif mod and mod.get("flagged", False):
         reason = "content_safety_flagged"
-    escalate = not safe
-    if config:
-        escalate = _should_escalate_by_policy(
-            no_answer=False,
-            confidence=confidence,
-            escalation_policy_json=config.guardrails_escalation_policy,
-            escalate_on_no_answer=config.guardrails_escalate_on_no_answer,
-            confidence_threshold=config.guardrails_confidence_threshold,
-        ) or not safe
+    # Harmful content: do NOT escalate; caller will return polite decline
+    escalate = False
     return GuardrailsResult(
         safe=safe,
         escalate=escalate,
@@ -151,9 +143,9 @@ def check_output(
 ) -> GuardrailsResult:
     """Run guardrails on model output (before final response).
 
-    Use this before returning the response to the user. Blocks or replaces
-    with safe message if unsafe. Supports structured no_answer (I don't know)
-    and escalation policy.
+    Use this before returning the response to the user. Harmful output:
+    polite decline, NO escalation. Escalation is decided by caller based on
+    loan+urgent+human criteria.
     """
     config = _get_config()
     key = api_key or (config.llm_api_key if config else None) or ""
@@ -166,15 +158,8 @@ def check_output(
         reason = "content_safety_flagged"
     elif no_answer:
         reason = "no_answer"
+    # Do NOT auto-escalate here; caller (guardrails_agent) decides based on loan+urgent+human
     escalate = False
-    if config:
-        escalate = _should_escalate_by_policy(
-            no_answer=no_answer,
-            confidence=confidence,
-            escalation_policy_json=config.guardrails_escalation_policy,
-            escalate_on_no_answer=config.guardrails_escalate_on_no_answer,
-            confidence_threshold=config.guardrails_confidence_threshold,
-        )
     return GuardrailsResult(
         safe=safe,
         escalate=escalate,
