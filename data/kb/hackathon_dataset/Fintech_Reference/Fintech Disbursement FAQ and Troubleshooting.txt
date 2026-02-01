@@ -1,6 +1,6 @@
-Fintech Education Loan Disbursement – FAQ and Troubleshooting
+Kredila Education Loan Disbursement – FAQ and Troubleshooting
 
-Common queries across Kredila, HDFC, SBI, ICICI and other education loan providers.
+Common queries for Kredila education loan disbursement and troubleshooting.
 
 1. Why is my loan not disbursed for 15+ days?
 
@@ -59,9 +59,8 @@ H. LRS Limit (International Loans)
 3. How long does disbursement take?
 
 • Kredila: Domestic 24-48 hours; International 48-72 hours
-• HDFC: 48-72 hours domestic; 72-96 hours international
-• SBI: 7-10 working days
-• ICICI: 48-72 hours domestic
+• Standard SLA: 7-10 working days after complete documentation
+• Premier institutes: May have expedited processing
 
 4. Whom to contact for delayed disbursement?
 

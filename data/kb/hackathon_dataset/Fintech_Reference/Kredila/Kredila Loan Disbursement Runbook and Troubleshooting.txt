@@ -1,4 +1,4 @@
-HDFC Education Loan Disbursement Runbook – Process and Troubleshooting
+Kredila Education Loan Disbursement Runbook – Process and Troubleshooting
 
 1. Disbursement Process Overview
 • SLA: Domestic disbursements within 48-72 hours of document completion

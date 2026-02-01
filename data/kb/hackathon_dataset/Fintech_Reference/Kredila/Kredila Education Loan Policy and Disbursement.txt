@@ -1,6 +1,6 @@
-ICICI Bank Education Loan – Policy and Disbursement
+Kredila Education Loan – Policy and Disbursement
 
-ICICI Bank offers education loans for studies in India and abroad under competitive terms.
+Kredila offers education loans for studies in India and abroad under competitive terms.
 
 1. Loan Overview
 • Domestic: Up to INR 1 Crore for premier institutes
@@ -21,18 +21,18 @@ ICICI Bank offers education loans for studies in India and abroad under competit
 • SLA: 48-72 hours for domestic after document completion
 • Requirements: Signed agreement, e-NACH, fee demand letter, CIBIL refresh
 
-4. Reasons for Disbursement Delay – ICICI Specific
+4. Reasons for Disbursement Delay – Kredila Specific
 
 • e-NACH/E-mandate not active: Re-initiate mandate; disbursement blocked until active
 • Document incomplete: Demand letter, fee invoice, or institute confirmation pending
 • PAN-Aadhaar not linked: Mandatory; link immediately for same-day fix
 • Margin money pending: Pay 5-15% margin for loans above unsecured limit
 • CIBIL refresh pending: Credit check done 24-48 hours before disbursement
-• Institute verification: ICICI may verify fee directly; institute delay adds 3-5 days
+• Institute verification: Kredila may verify fee directly; institute delay adds 3-5 days
 • Name mismatch: Affidavit of Identity if PAN/Aadhaar name differs from admission letter
 
 5. Contact for Disbursement Status
 • Branch Relationship Manager
-• Customer care: 1860-267-6767
-• iMobile app: Track loan status
-• Escalation: grievance@icicibank.com for delays > 10 days
+• Customer care: Available for support
+• Mobile app: Track loan status
+• Escalation: Available for delays > 10 days

@@ -1,4 +1,4 @@
-SBI Education Loan Disbursement – Process and Delay Resolution
+Kredila Education Loan Disbursement – Process and Delay Resolution
 
 1. Disbursement SLA
 • Domestic: 7-10 working days after complete documentation
@@ -8,7 +8,7 @@ SBI Education Loan Disbursement – Process and Delay Resolution
 2. Why My Loan Is Not Disbursed? Common Reasons and Solutions
 
 REASON 1: e-NACH or E-Mandate Not Activated
-• SBI requires active NACH mandate for EMI deduction
+• Kredila requires active NACH mandate for EMI deduction
 • Disbursement blocked until mandate is successful
 • Solution: Complete NACH registration at branch or online; verify status in 2-3 days
 • If rejected: Re-initiate; check bank account has sufficient balance for test debit
@@ -33,8 +33,8 @@ REASON 5: CIBIL or Credit Check Pending
 • Solution: Resolve any dues; credit update may take 7-14 days
 
 REASON 6: Institute Confirmation Delayed
-• SBI verifies fee with institute directly in some cases
-• Solution: Follow up with institute to send confirmation to SBI; 5-7 days typical
+• Kredila verifies fee with institute directly in some cases
+• Solution: Follow up with institute to send confirmation to Kredila; 5-7 days typical
 
 REASON 7: Post-Dated Cheques or Security Documents
 • PDCs required for unsecured loans
@@ -46,6 +46,6 @@ REASON 8: LRS Limit (International Loans)
 
 3. Escalation
 • Branch Manager: First point for status
-• Toll-free: 1800 1234 for escalation
-• Grievance: sbicsls@sbi.co.in for central redressal
+• Customer Care: Available for escalation
+• Grievance: Available for central redressal
 • Delay > 15 days: Escalate to regional office

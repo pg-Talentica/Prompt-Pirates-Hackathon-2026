@@ -22,8 +22,14 @@ COPY guardrails/ guardrails/
 COPY data/ data/
 COPY scripts/ scripts/
 
+# Note: .env file should be provided via docker-compose env_file
+# The .env file is loaded by docker-compose, not copied into image
+
 # Ensure app user can write to data/ (SQLite memory.db, vector_store)
 RUN mkdir -p /app/data /app/data/vector_store 2>/dev/null || true && chown -R app:app /app/data
+
+# Make entrypoint script executable
+RUN chmod +x /app/scripts/docker_entrypoint.py
 
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
@@ -32,7 +38,8 @@ USER app
 
 EXPOSE 8000
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')" || exit 1
 
+ENTRYPOINT ["python", "scripts/docker_entrypoint.py"]
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

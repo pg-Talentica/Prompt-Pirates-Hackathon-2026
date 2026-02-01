@@ -113,6 +113,7 @@
   height: calc(100vh - 14rem);
   min-height: 360px;
   overflow: hidden;
+  position: relative;
 }
 
 @media (max-width: 768px) {
@@ -156,9 +157,25 @@
 
 .right-panel-tabs {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-shrink: 0;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg);
+  padding: 0 var(--space-md);
+  gap: var(--space-md);
+}
+
+.right-panel-tabs-left {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.right-panel-tabs-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .right-panel-tab {
@@ -228,12 +245,21 @@
   color: var(--color-text-muted);
   cursor: pointer;
   transition: all var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .right-panel-toggle:hover {
   color: var(--color-primary);
   border-color: var(--color-primary);
   background: var(--color-bg);
+}
+
+.right-panel-toggle--floating {
+  position: absolute;
+  right: 0;
+  top: var(--space-md);
+  z-index: 10;
+  box-shadow: 0 2px 8px var(--color-shadow);
 }
 
 .chat-header h2 {

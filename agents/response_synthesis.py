@@ -41,10 +41,62 @@ def _call_llm(prompt: str, system: str | None = None) -> str:
 
 OUT_OF_CONTEXT_MESSAGE = (
     "I don't have information about that in my knowledge base. "
-    "My expertise is limited to education loans and fintech (Kredila, HDFC, SBI, ICICI): "
+    "My expertise is limited to education loans and fintech (Kredila): "
     "loan policies, eligibility, disbursement runbooks, troubleshooting delays, incident reports, "
     "and regulatory compliance (RBI). Please ask a question related to these topics, or contact support."
 )
+
+
+def _is_education_loan_query(query: str) -> bool:
+    """Check if query is related to education loans."""
+    query_lower = query.lower()
+    education_loan_keywords = [
+        "loan", "policy", "eligibility", "student", "education", "abroad", 
+        "international", "disbursement", "kredila", "application", "apply",
+        "interest", "rate", "repayment", "collateral", "co-applicant", "coapplicant",
+        "admission", "tuition", "fee", "scholarship", "financial aid", "study",
+        "course", "degree", "university", "college", "institute", "institution"
+    ]
+    return any(keyword in query_lower for keyword in education_loan_keywords)
+
+
+def _call_openai_fallback(query: str, reasoning: str = "") -> str:
+    """Call OpenAI as fallback for education loan queries when retrieval fails."""
+    try:
+        from api.config import get_settings
+        from tools.langfuse_observability import get_openai_client
+        settings = get_settings()
+        if not settings.llm_api_key:
+            return None
+        
+        client = get_openai_client()
+        system = (
+            "You are a customer support agent for Kredila education loans. "
+            "Answer questions about education loan applications, eligibility, policies, and processes. "
+            "Provide accurate, helpful information based on general education loan knowledge. "
+            "If the question is not related to education loans, politely decline. "
+            "Always be clear that this is general information and users should contact Kredila for specific details. "
+            "Never make up specific loan amounts, interest rates, or policies that aren't standard. "
+            "Focus on: eligibility criteria, application process, required documents, disbursement, repayment, and common FAQs."
+        )
+        
+        prompt = f"User Query: {query}\n\nReasoning: {reasoning}\n\nProvide a helpful response about education loans. If this is not an education loan question, politely decline."
+        
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": prompt}
+        ]
+        
+        resp = client.chat.completions.create(
+            model=settings.model,
+            messages=messages,
+            max_tokens=600,
+            temperature=0.3,  # Lower temperature for more factual responses
+        )
+        return (resp.choices[0].message.content or "").strip()
+    except Exception as e:
+        logger.warning("OpenAI fallback failed: %s", e)
+        return None
 
 
 def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
@@ -56,8 +108,24 @@ def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
     retrieval = state.get("retrieval_result") or []
     intent = state.get("intent_result") or {}
 
-    # No relevant context: do not call LLM; respond that it's outside our scope
+    # Check if query is about education loans
+    is_education_loan = _is_education_loan_query(query)
+
+    # No relevant context: try OpenAI fallback for education loan queries
     if not retrieval:
+        if is_education_loan:
+            logger.info("No retrieval context for education loan query; trying OpenAI fallback")
+            fallback_response = _call_openai_fallback(query, reasoning)
+            if fallback_response:
+                logger.info("OpenAI fallback provided response")
+                return {
+                    "draft_response": f"{fallback_response}\n\n[Note: This is general information. For specific Kredila policies, please contact support or check our knowledge base.]",
+                    "recommended_actions": [
+                        {"description": "Contact Kredila support for specific loan details."},
+                        {"description": "Check our knowledge base for Kredila-specific policies."},
+                    ],
+                }
+        
         logger.info("No retrieval context for query; returning out-of-context response")
         return {
             "draft_response": OUT_OF_CONTEXT_MESSAGE,
@@ -73,12 +141,36 @@ def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
         except Exception:
             conf_threshold = 1.1
         best_distance = min(distances)
-        if best_distance > conf_threshold:
-            logger.info("Best retrieval distance %.3f > %.2f; returning out-of-context", best_distance, conf_threshold)
+        
+        # For education loan queries, be more lenient with the threshold
+        # Use a more lenient threshold for education loan queries
+        effective_threshold = conf_threshold * 1.2 if is_education_loan else conf_threshold
+        
+        if best_distance > effective_threshold:
+            # If it's an education loan query but distance is too high, try OpenAI fallback
+            if is_education_loan:
+                logger.info("Best retrieval distance %.3f > %.2f (effective: %.2f); trying OpenAI fallback", 
+                           best_distance, conf_threshold, effective_threshold)
+                fallback_response = _call_openai_fallback(query, reasoning)
+                if fallback_response:
+                    logger.info("OpenAI fallback provided response")
+                    return {
+                        "draft_response": f"{fallback_response}\n\n[Note: This is general information. For specific Kredila policies, please contact support or check our knowledge base.]",
+                        "recommended_actions": [
+                            {"description": "Contact Kredila support for specific loan details."},
+                            {"description": "Check our knowledge base for Kredila-specific policies."},
+                        ],
+                    }
+            
+            logger.info("Best retrieval distance %.3f > %.2f (effective: %.2f); returning out-of-context", 
+                       best_distance, conf_threshold, effective_threshold)
             return {
                 "draft_response": OUT_OF_CONTEXT_MESSAGE,
                 "recommended_actions": [{"description": "Try rephrasing your question about loans or eligibility."}],
             }
+        else:
+            logger.info("Best retrieval distance %.3f <= %.2f (effective: %.2f); proceeding with synthesis", 
+                       best_distance, conf_threshold, effective_threshold)
 
     # Reference retrieved context (mandatory)
     refs = [c.get("source_file", "") for c in retrieval[:5] if c.get("source_file")]
@@ -91,9 +183,10 @@ def response_synthesis_agent(state: CoPilotState) -> dict[str, Any]:
     system = (
         "You are a customer support agent for Kredila education loans. "
         "Answer ONLY using the retrieved context below. "
-        "If the query is not related to the context, respond: 'I don't have information about that in my knowledge base. Please ask about Kredila education loans, eligibility, runbooks, or compliance.' "
+        "If the query is not related to the context or education loans, respond: 'I don't have information about that in my knowledge base. Please ask about Kredila education loans, eligibility, runbooks, or compliance.' "
         "Never make up information. Never answer questions outside the provided context. "
-        "Always cite the source documents."
+        "Always cite the source documents. "
+        "Focus on education loan applications, policies, eligibility, disbursement, and related topics only."
     )
     prompt = f"Query: {query}\nIntent: {intent}\n\nReasoning:\n{reasoning}\n\nRetrieved context:\n{context_block}\n\nProvide a helpful response based ONLY on the above context. End with: [Sources: {retrieval_summary}]"
     draft = _call_llm(prompt, system=system)

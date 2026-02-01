@@ -51,12 +51,6 @@ export function MetricsPanel({ events }: MetricsPanelProps) {
           <span className="metrics-value">{metrics.toolCount}</span>
         </li>
         <li>
-          <span className="metrics-label">Token usage</span>
-          <span className="metrics-value" title="Not yet provided by backend">
-            —
-          </span>
-        </li>
-        <li>
           <span className="metrics-label">Escalation</span>
           <span className="metrics-value" data-escalated={metrics.escalated}>
             {metrics.escalated ? "Yes" : "No"}

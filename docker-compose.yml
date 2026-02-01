@@ -14,12 +14,16 @@ services:
     environment:
       - API_HOST=0.0.0.0
       - API_PORT=8000
+    # Ensure .env file is available (docker-compose will load it)
+    volumes:
+      - ./data:/app/data
+    # Increase start period to allow indexing time
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 10s
+      start_period: 60s
     restart: unless-stopped
 
   ui:

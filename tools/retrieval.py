@@ -54,6 +54,13 @@ def retrieve(
             max_distance = 1.2
     store = get_vector_store(persist_directory=persist_directory, api_key=api_key)
     results = store.search(query=query, k=k)
+    
+    # Log raw results before filtering
+    if results:
+        raw_distances = [r.get("distance") for r in results if r.get("distance") is not None]
+        if raw_distances:
+            logger.debug("Raw retrieval distances: min=%.4f, max=%.4f", min(raw_distances), max(raw_distances))
+    
     # Filter by relevance: discard chunks with distance > max_distance (L2; lower = better)
     filtered = []
     for r in results:
@@ -62,7 +69,11 @@ def retrieve(
             filtered.append(r)  # No distance = keep (e.g. some backends)
         elif d <= max_distance:
             filtered.append(r)
-    logger.info("Retrieval query=%r k=%d -> %d results (after relevance filter)", query[:50], k, len(filtered))
+        else:
+            logger.debug("Filtered out result with distance %.4f > %.2f", d, max_distance)
+    
+    logger.info("Retrieval query=%r k=%d -> %d results (after relevance filter, max_distance=%.2f)", 
+               query[:50], k, len(filtered), max_distance)
     return filtered
 
 

@@ -57,16 +57,18 @@ class Settings(BaseSettings):
 
     # RAG: max distance for relevance (L2; higher = less similar). Above this = out of context.
     # Looser = more domain queries pass (e.g. disbursement); tighter = blocks off-topic (e.g. "Who is Raghu?").
+    # Increased default to 1.5 to be more lenient for education loan queries
     rag_max_distance: float = Field(
-        default=1.2,
+        default=1.5,
         ge=0.0,
         le=10.0,
         description="Retrieval relevance threshold; results with distance above this are discarded",
     )
     # Synthesis gate: best result must have distance <= this to answer; else say I don't know.
-    # 1.1 allows disbursement/runbook matches; "Who is Raghu?" typically > 1.3 to any loan doc.
+    # 1.3 allows disbursement/runbook matches and education loan policy queries; "Who is Raghu?" typically > 1.5 to any loan doc.
+    # Increased default to be more lenient for education loan queries
     rag_confidence_max_distance: float = Field(
-        default=1.1,
+        default=1.3,
         ge=0.0,
         le=10.0,
         description="Best retrieval result must be within this distance to answer; else out-of-context",

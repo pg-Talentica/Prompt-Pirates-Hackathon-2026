@@ -19,7 +19,7 @@ function generateId(): string {
 }
 
 export function ChatPanel() {
-  const [sessionId, setSessionId] = useState(() => {
+  const [sessionId] = useState(() => {
     try {
       return localStorage.getItem(SESSION_KEY) ?? "default";
     } catch {
@@ -121,33 +121,6 @@ export function ChatPanel() {
       <div className="chat-main">
         <div className="chat-header">
           <h2>Chat</h2>
-          <button
-            type="button"
-            className="right-panel-toggle"
-            onClick={toggleRightPanel}
-            aria-label={rightPanelVisible ? "Hide pipeline & metrics" : "Show pipeline & metrics"}
-            title={rightPanelVisible ? "Hide right panel" : "Show right panel"}
-          >
-            {rightPanelVisible ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M11 17 6 12l5-5M18 17l-5-5 5-5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M13 17l5-5-5-5M6 17l5-5-5-5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-          </button>
-          <label className="session-label">
-            Session:{" "}
-            <input
-              type="text"
-              value={sessionId}
-              onChange={(e) => setSessionId(e.target.value)}
-              placeholder="default"
-              className="session-input"
-            />
-          </label>
         </div>
         <div className="chat-messages" role="log" aria-live="polite">
         {displayMessages.map((msg) => (
@@ -221,31 +194,65 @@ export function ChatPanel() {
           </button>
         </div>
       </div>
+      {!rightPanelVisible && (
+        <button
+          type="button"
+          className="right-panel-toggle right-panel-toggle--floating"
+          onClick={toggleRightPanel}
+          aria-label="Show pipeline & metrics"
+          title="Show right panel"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M13 17l5-5-5-5M6 17l5-5-5-5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
       {rightPanelVisible && (
       <div className="chat-right-panel">
         <nav className="right-panel-tabs" role="tablist" aria-label="Agent details">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={rightTab === "pipeline"}
-            aria-controls="panel-pipeline"
-            id="tab-pipeline"
-            className={`right-panel-tab ${rightTab === "pipeline" ? "right-panel-tab--active" : ""}`}
-            onClick={() => setRightTab("pipeline")}
-          >
-            Agent Pipeline
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={rightTab === "metrics"}
-            aria-controls="panel-metrics"
-            id="tab-metrics"
-            className={`right-panel-tab ${rightTab === "metrics" ? "right-panel-tab--active" : ""}`}
-            onClick={() => setRightTab("metrics")}
-          >
-            Metrics
-          </button>
+          <div className="right-panel-tabs-left">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={rightTab === "pipeline"}
+              aria-controls="panel-pipeline"
+              id="tab-pipeline"
+              className={`right-panel-tab ${rightTab === "pipeline" ? "right-panel-tab--active" : ""}`}
+              onClick={() => setRightTab("pipeline")}
+            >
+              Agent Pipeline
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={rightTab === "metrics"}
+              aria-controls="panel-metrics"
+              id="tab-metrics"
+              className={`right-panel-tab ${rightTab === "metrics" ? "right-panel-tab--active" : ""}`}
+              onClick={() => setRightTab("metrics")}
+            >
+              Metrics
+            </button>
+          </div>
+          <div className="right-panel-tabs-right">
+            <button
+              type="button"
+              className="right-panel-toggle"
+              onClick={toggleRightPanel}
+              aria-label={rightPanelVisible ? "Hide pipeline & metrics" : "Show pipeline & metrics"}
+              title={rightPanelVisible ? "Hide right panel" : "Show right panel"}
+            >
+              {rightPanelVisible ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M11 17 6 12l5-5M18 17l-5-5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M13 17l5-5-5-5M6 17l5-5-5-5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </button>
+          </div>
         </nav>
         <div
           id="panel-pipeline"

@@ -25,12 +25,14 @@ HARMFUL_DECLINE_MESSAGE = (
 def ingestion_agent(state: CoPilotState) -> dict[str, Any]:
     """Normalize query and run guardrails on input. Return partial state update."""
     query = (state.get("query") or "").strip() or ""
-    normalized = query.strip().lower()[:2000]  # Normalize: strip, lower, cap length
-    if not normalized and query:
-        normalized = query.strip()[:2000]
+    # Normalize: strip, cap length, but preserve case for better retrieval matching
+    # Lowercase is only used for guardrails check, not for retrieval
+    normalized = query.strip()[:2000]
+    normalized_lower = normalized.lower() if normalized else ""
 
     # Guardrails after ingestion: harmful content → polite decline, no escalation
-    result = policy_check(normalized or query, check_type="input")
+    # Use lowercase for guardrails check
+    result = policy_check(normalized_lower or normalized or query, check_type="input")
     safe = result.get("safe", True)
 
     # Harmful: set decline message; graph will route to decline (not escalate)
@@ -40,7 +42,7 @@ def ingestion_agent(state: CoPilotState) -> dict[str, Any]:
         final_response = HARMFUL_DECLINE_MESSAGE
         logger.info("Ingestion: harmful input; returning polite decline (no escalation)")
     else:
-        logger.info("Ingestion normalized query len=%d guardrails safe=%s", len(normalized), safe)
+        logger.info("Ingestion normalized query len=%d guardrails safe=%s", len(normalized or query), safe)
 
     out = {
         "normalized_query": normalized or query,
